@@ -6,12 +6,16 @@ public class PlayerMover : MonoBehaviour {
 	public float speed;
 
 	public Vector3 jump;
-	public float jumpForce = 6.0f;
+	public float jumpForce = 2.0f;
 	public float jumpHeight = 2.0f;
+
+	public Transform theCameraTransform;
 
 	private bool isGrounded;
 
 	Rigidbody rb;
+
+	public float currentX = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +25,7 @@ public class PlayerMover : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		if (Input.GetKey (KeyCode.RightArrow)) {
 			transform.Translate (speed, 0, 0);
 		} else if (Input.GetKey (KeyCode.LeftArrow)) {
@@ -36,6 +41,16 @@ public class PlayerMover : MonoBehaviour {
 			rb.AddForce (jump * jumpForce, ForceMode.Impulse);
 			isGrounded = false;
 		}
+
+		if (Input.GetKeyDown (KeyCode.R)) {
+			this.transform.rotation = Quaternion.Euler (0, 0, 0);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			this.transform.position = new Vector3 (-1.2f, 4.46f, 0.36f);
+			this.transform.rotation = Quaternion.Euler (0, 0, 0);
+		}
+			
 	}
 
 	void OnCollisionStay() {
