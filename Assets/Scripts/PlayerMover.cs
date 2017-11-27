@@ -16,6 +16,7 @@ public class PlayerMover : MonoBehaviour {
 	Rigidbody rb;
 
 	public float currentX = 0.0f;
+	public float currentY = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -26,13 +27,15 @@ public class PlayerMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKey (KeyCode.RightArrow)) {
+		currentX += Input.GetAxis ("Mouse X");
+
+		if (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) {
 			transform.Translate (speed, 0, 0);
-		} else if (Input.GetKey (KeyCode.LeftArrow)) {
+		} else if (Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) {
 			transform.Translate (-speed, 0, 0);
-		} else if (Input.GetKey (KeyCode.UpArrow)) {
+		} else if (Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)) {
 			transform.Translate (0, 0, speed);
-		} else if (Input.GetKey (KeyCode.DownArrow)) {
+		} else if (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)) {
 			transform.Translate (0, 0, -speed);
 		}
 
@@ -55,6 +58,11 @@ public class PlayerMover : MonoBehaviour {
 
 	void OnCollisionStay() {
 		isGrounded = true;
+	}
+
+	private void LateUpdate() {
+		Quaternion rotation = Quaternion.Euler (currentY, currentX, 0);
+		this.transform.rotation = rotation;
 	}
 }
 

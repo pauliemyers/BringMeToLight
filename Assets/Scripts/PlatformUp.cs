@@ -21,7 +21,7 @@ public class PlatformUp : MonoBehaviour {
 	private IEnumerator PlatformMoveVert() {
 		while (enabled) {
 			yield return new WaitForSeconds (1.5f);
-			while (transform.position.y < 25.0f) {
+			while (transform.position.y < 500.0f) {
 				this.transform.Translate (0, platformSpeed * Time.deltaTime, 0, Space.World);
 				yield return null;
 			}

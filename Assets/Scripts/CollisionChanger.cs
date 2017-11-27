@@ -35,7 +35,6 @@ public class CollisionChanger : MonoBehaviour {
 		else if (col.gameObject.tag == "grassDark") {
 			var rend = col.gameObject.GetComponent<Renderer> ();
 			rend.material = matGrassDark;
-			col.gameObject.GetComponent<PlatformUp> ().goUp = true;
 		}
 		else if (col.gameObject.tag == "snow") {
 			var rend = col.gameObject.GetComponent<Renderer> ();
